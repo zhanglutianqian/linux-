@@ -1,0 +1,173 @@
+rm -rf + 文件夹名   删除该目录  rmdir 删除空目录
+mkdir + 文件 创建目录
+clear 清屏
+
+pwd   当前路径
+tar -zxvf 文件名 解压后缀是.gz的文件
+
+ll -i  显示文件节点 ，使用find ./ -inum XXX（节点号） -print -exec rm -rf {} \;删除乱码文件
+sudo mv 修改文件名 /路径/ 
+tail -n（数字），查看实时更新n行日志
+sed -n '/2014-12-17 16:17:20/,/2014-12-17 16:17:36/p'  test.log    按时间段查看日志
+***************************************************************************************
+shutdown -t  + 时间    时间(s)后关机
+shutdown -h 20：25   20：25关机
+shutdown -h 立即关机
+shutdown -r  重新启动
+***************************************************************************************
+df -hl 查看磁盘剩余空间
+df -h 查看每个根路径的分区大小
+du -sh [目录名] 返回该目录的大小
+du -sm [文件夹] 返回该文件夹总M数
+
+df -h ##查看每个根路径的分区大小
+sudo du --max-depth=1 -h ## 查看当前的文件夹下的磁盘使用情况
+fsck -t ext4 /dev/sda3 -y         ## 修复挂载磁盘 /dev/sda3
+
+fsck 命令格式如下：
+[root@localhost ~]# fsck [选项] 分区设备文件名
+
+选项：
+-t 文件系统：指定分区的文件系统；
+-A：按照配置文件 /etc/fstab 检查所有分区；
+-a：不用显示用户提示，自动修复文件系统；
+-C：显示检查分区的进度条；
+-f：强制检测。一般 fsck 命令如果没有发现分区有问题，则是不会检测的。如果强制检测，那么不管是否发现问题，都会检测；
+-y：自动修复。和 -a 作用一致，不过有些文件系统只支持 -y；
+
+如果想要修复某个分区，则只需执行如下命令：
+[root@localhost ~]#fsck -y /dev/sdb1
+#自动修复
+
+运行完毕之后重启服务器
+******************************************************************************
+
+ip a     查看本机IP
+
+sudo reboot 立即重启
+
+ps -ef | grep "python"  查看本机python启动信息
+
+tail -100f text.log    //    tail -f -n 100 text.log               最后100行实时更新日志
+
+chmod 777 +文件名    赋予最高权限
+
+mv test.txt wbk.txt   ## 将文件test.txt重命名为wbk.txt
+
+unzip xxx.zip ./*   ## zip解压
+
+unzip xxx.zip -d xxx  ## 解压到指定目录
+
+tar -xzvf xxx.tar.gz   ## tar.gz 解压
+
+scp -r 20181029 oeasy@192.168.6.198:/home/oeasy     ## 本地该目录复制至oeasy用户的192.168.6.198/home/oeasy 目录下
+
+sudo vim /etc/network/interfaces
+
+sudo /etc/init.d/net()  restart                         ## 修改ip地址并重新启动
+
+find zhanglucs/20181029/ -name "*.py"       ## 查找zhanglucs/20181029/路径下的py的所有文件
+find zhanglucs/20181029/ -name "00*"       ## 查找zhanglucs/20181029/路径下的00的所有文件
+
+ln -s zhanglucs/20181029/001.py        ## 创建文件的软连接（相当于win下的快捷方式使用）
+****************************************************************************************************************************
+apt  ## 在线安装/卸载/更新软件包
+
+sudo apt install +软件包          ## 安装
+sudo apt remove +软件包       ## 卸载
+sudo apt update           ## 更新
+
+  E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+  E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+  解决：sudo rm /var/cache/apt/archives/lock
+	     sudo rm /var/lib/dpkg/lock
+  还有问题，继续：
+  sudo dpkg --configure -a
+  sudo apt-get update
+
+【sl    ##  小火车         htop  ## 性能监控工具      screenfetch  ## 系统信息  nvidia-smi ## 用来查看GPU版本信息，GPU使用信息查询】
+
+【按CTRL+ALT+F1也可以切换到命令行模式   按CTRL+ALT+F7会切换回来】
+****************************************************************************************************************************
+ubuntu 下同时安装python2 python3 且pip正常使用，只是用pip3是需要安装pip3 ，命令为：sudo apt-get install python3-pip
+
+****************************************************************************************************************************
+阿里云                              http://mirrors.aliyun.com/pypi/simple/ 
+中国科技大学                   https://pypi.mirrors.ustc.edu.cn/simple/ 
+豆瓣(douban)                   http://pypi.douban.com/simple/ 
+清华大学                          https://pypi.tuna.tsinghua.edu.cn/simple/ 
+中国科学技术大学            http://pypi.mirrors.ustc.edu.cn/simple/
+
+pip install XXX -i  http://mirrors.aliyun.com/pypi/simple/ 
+
+****************************************************************************************************************************
+.tar
+压缩：tar cvf FileName.tar FileName
+解压：tar xvf FileName.tar
+--------------------------------------------- 
+.gz
+解压1：gunzip FileName.gz 
+解压2：gzip -d FileName.gz 
+压缩：gzip FileName 
+.tar.gz 
+解压：tar zxvf FileName.tar.gz 
+压缩：tar zcvf FileName.tar.gz DirName 
+--------------------------------------------- 
+.bz2 
+解压1：bzip2 -d FileName.bz2 
+解压2：bunzip2 FileName.bz2 
+压缩： bzip2 -z FileName 
+.tar.bz2 
+解压：tar jxvf FileName.tar.bz2 
+压缩：tar jcvf FileName.tar.bz2 DirName 
+--------------------------------------------- 
+.bz 
+解压1：bzip2 -d FileName.bz 
+解压2：bunzip2 FileName.bz 
+压缩：未知 
+.tar.bz 
+解压：tar jxvf FileName.tar.bz 
+压缩：未知 
+--------------------------------------------- 
+.Z 
+解压：uncompress FileName.Z 
+压缩：compress FileName 
+.tar.Z 
+解压：tar Zxvf FileName.tar.Z 
+压缩：tar Zcvf FileName.tar.Z DirName 
+--------------------------------------------- 
+.tgz 
+解压：tar zxvf FileName.tgz 
+压缩：未知 
+.tar.tgz 
+解压：tar zxvf FileName.tar.tgz 
+压缩：tar zcvf FileName.tar.tgz FileName 
+--------------------------------------------- 
+.zip 
+解压：unzip FileName.zip 
+压缩：zip FileName.zip DirName 
+--------------------------------------------- 
+.rar 
+解压：rar a FileName.rar 
+压缩：rar e FileName.rar 
+****************************************************************************************
+1.查询日志中含有某个关键字的信息  cat app.log |grep 'error'
+
+2.查询日志尾部最后10行的日志  tail  -n  10  app.log 
+
+3.查询10行之后的所有日志 tail -n +10 app.log  
+
+4.查询日志文件中的头10行日志 head -n 10  app.log  
+
+5.查询日志文件除了最后10行的其他所有日志 head -n -10  app.log
+
+6.查询日志中含有某个关键字的信息,显示出行号(在1的基础上修改) cat -n  app.log |grep 'error'
+
+7.显示102行,前10行和后10行的日志 cat -n app.log |tail -n +92|head -n 20
+
+8.根据日期时间段查询(前提日志总必须打印日期,先通过grep确定是否有该时间点) sed -n '/2014-12-17 16:17:20/,/2014-12-17 16:17:36/p'  app.log
+
+9.使用more和less命令(分页查看,使用空格翻页) cat -n app.log |grep "error" |more
+
+10.把日志保存到文件 cat -n app.log |grep "error"  > temp.txt
+****************************************************************************************
