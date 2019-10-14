@@ -1,8 +1,6 @@
 # linux-
 自己收集并常用的
 
-
-
 Linux /dev/sda1磁盘满了，清理办法:
 
 df -lh 
@@ -38,12 +36,12 @@ sudo apt-get autoremove 删除系统不再使用的孤立软件
 auto lo
 iface lo inet loopback
 
-auto enp2s0                                           # enp2s0 网络接口
+auto enp2s0                                   # enp2s0 网络接口
 iface enp2s0 inet static               	      #配置静态IP            / dhcp   默认（动态）
-address 192.168.6.12                            #IP地址
+address 192.168.6.12                          #IP地址
 netmask 255.255.255.0                         #子网掩码
-gateway 192.168.6.1                             # 默认网关
-dns-nameservers 114.114.114.114 8.8.8.8     # NDS地址
+gateway 192.168.6.1                           # 默认网关
+dns-nameservers 114.114.114.114 8.8.8.8       # NDS地址
 ******************************************************************************************************************
 auto lo
 iface lo inet loopback
@@ -65,21 +63,18 @@ net.ipv6.conf.default.disable_ipv6 = 1
 
 sysctl -p
 ==========================================================================
-2路服务器ip固定不上，baidu.com ping不通
+ip固定不上，baidu.com ping不通
 
 sed -i "/^exit/i\echo \"nameserver 114.114.114.114 \" > /etc/resolv.conf" /etc/rc.local
 执行后删除/etc/resolv.conf  
 
 systemctl stop NetworkManager
 systemctl disable NetworkManager
-========================
-networking 服务
-
-========================
 ============================================================================
 配置临时ip：
 1.查看网口编号
-2.    sudo ifconfig enp2s0 192.168.0.230
+2.
+sudo ifconfig enp2s0 192.168.0.230
 sudo ifconfig eth0 192.168.0.230
 =============================================================================
 
@@ -103,13 +98,12 @@ sudo chown -R oeasy:oeasy OeasyProxy/  ## 修改权限
 chmod +x   ## 赋予执行权限       
 777 ## 最高权限
 =============================================================================
-V8,1 版本算法支持摄像头为：
 
 平台/厂商                      摄像头型号/名称                                                  URL
 
 华为：X3221-C 200万超星光人脸识别红外半球型摄像机                    rtsp://admin:oeasy123@192.168.6.123/LiveMedia/ch1/Media1
 海康：DS-2CD2625EFV2-IZS   （不分型号）                            rtsp://admin:oeasy123@192.168.6.123/mpeg4/ch1/sub/av_stream
-天地伟业：sdk相同 rtsp相同（不分型号）                            rtsp://admin:oeasy123@192.168.6.123
+天地伟业：sdk相同 rtsp相同（不分型号）                              rtsp://admin:oeasy123@192.168.6.123
 ==================================================================
 arp -a ## 查看本局域网所有ip
 iftop  查看各个ip占用宽带情况
